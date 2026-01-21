@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Drum Machine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: radial-gradient(circle, #020617, #0f172a);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: system-ui;
+      color: white;
+    }
+
+    .drum-machine {
+      background: #020617;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 40px black;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #22d3ee;
+    }
+
+    .pads {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 15px;
+    }
+
+    button {
+      height: 80px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #22d3ee, #a855f7);
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="drum-machine">
+  <h2>🥁 Drum Machine</h2>
+  <div class="pads">
+    <button onclick="play('kick')">A</button>
+    <button onclick="play('snare')">S</button>
+    <button onclick="play('hihat')">D</button>
+  </div>
+</div>
+
+<script>
+  function play(sound) {
+  const audio = new Audio();
+  audio.src = `sounds/${sound}.wav`;
+  audio.currentTime = 0;
+  audio.play().catch(err => {
+    console.error("Audio play failed:", err);
+  });
+}
+    
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "a") play("kick");
+    if (e.key === "s") play("snare");
+    if (e.key === "d") play("hihat");
+  });
+</script>
+
+</body>
+</html>
